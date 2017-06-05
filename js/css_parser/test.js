@@ -22653,7 +22653,6 @@ fieldset[disabled] .btn-danger.active {
 .icon-address-card:before { content: '\\f2bb'; } /* '' */
 .icon-address-card-o:before { content: '\\f2bc'; } /* '' */
 .icon-user-circle:before { content: '\\f2bd'; } /* '' */
-.icon-user-circle-o:before { content: '\\f2be'; } /* '' */
 
 @charset "UTF-8";       /* Set the encoding of the style sheet to Unicode UTF-8 */
 @charset 'iso-8859-15'; /* Invalid, wrong quoting style used */
@@ -23191,4 +23190,6 @@ tobi loki jane {
 }
 
 b{ ; ;font-weight:bold; ;  color/**/:/* */ 12px;; padding/*4815162342*/: 1px /**/ 2px /*13*/ 3px /*{bracketed}*/; border:none; }
+
+foo { color: red; }}} bar { color: blue; }
 `;

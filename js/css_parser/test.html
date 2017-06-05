@@ -21,9 +21,17 @@
 <script>
 	//var css = 'html, body{ background: white }';
 
-	var tree = css_parse(css);
+	var tree = css_parse(css, true);
 	
-	console.log(tree); console.log(tree.stylesheet.rules.length);
+	console.log(tree);
+	
+	for(var i = 0; i < tree.stylesheet.errors.length; i++){ console.error('parsing error: ' + tree.stylesheet.errors[i].message); }
+
+	var rules = tree.stylesheet.rules;
+
+	console.log(rules.length);
+
+	console.log(rules[rules.length-1]);
 	
 	var result = css_compile(tree, '\n', function(node){ node.some = true; } );
 	

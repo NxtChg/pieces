@@ -41,7 +41,7 @@ function css_parse(css, silent)
 
 	function selector()
 	{
-		whitespace();
+		whitespace(); while(css[0] == '}'){ error('extra closing bracket'); css = css.slice(1); whitespace(); }
 
 		var m = match(/^([^{]+)/);
 		
@@ -140,7 +140,7 @@ function css_parse(css, silent)
 	
 		var node, rules = comments();
 	
-		while(css.length && css[0] != '}' && (node = (at_rule() || rule())))
+		while(css.length && (core || css[0] != '}') && (node = (at_rule() || rule())))
 		{
 			rules.push(node); rules = rules.concat(comments());
 		}
