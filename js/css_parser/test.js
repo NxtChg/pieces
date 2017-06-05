@@ -23102,11 +23102,6 @@ head, /* footer, */body/*, nav */ { /* 2 */
 
 /* 6 */
 
-a {
-    color/**/: 12px;
-    padding/*4815162342*/: 1px /**/ 2px /*13*/ 3px;
-}
-
 foo { /*/*/
   /* something */
   bar: baz; /* http://foo.com/bar/baz.html */
@@ -23190,5 +23185,10 @@ tobi loki jane {
     {
         .test { display: flex; }
     }
-b{ ; ;font-weight:bold; ; }
+
+@page :left {
+  color:red;
+}
+
+b{ ; ;font-weight:bold; ;  color/**/:/* */ 12px;; padding/*4815162342*/: 1px /**/ 2px /*13*/ 3px /*{bracketed}*/; border:none; }
 `;

@@ -54,7 +54,7 @@ function css_parse(css, silent)
 
 	function declaration()
 	{
-		match(/^([;\s]*)+/); // ignore initial ; if any + whitespace
+		match(/^([;\s]*)+/); // ignore empty declarations + whitespace
 
 		const comment_regexp = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
 
@@ -64,9 +64,9 @@ function css_parse(css, silent)
 		
 		if(!match(/^:\s*/)) return error("property missing ':'");
 		
-		var val = match(/^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?\)|[^};])+)/);
+		var val = match(/^((?:\/\*.*?\*\/|'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?\)|[^};])+)/);
 		
-		var ret = { type: 'declaration', property: prop.replace(comment_regexp, ''), value: val ? val[0].trim().replace(comment_regexp, '') : '' };
+		var ret = { type: 'declaration', property: prop.replace(comment_regexp, ''), value: val ? val[0].replace(comment_regexp, '').trim() : '' };
 		
 		match(/^[;\s]*/);
 		
