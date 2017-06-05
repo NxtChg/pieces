@@ -7,7 +7,8 @@ Based on https://github.com/reworkcss/css but rewritten and greatly simplified.
 
 ```js
 var tree = css_parse('body { font-size: 12px; }');
-css_compile(tree, '\n');
+
+var out  = css_compile(tree, '\n');
 ```
 
 If 'silent' is set to 'true' in css_parse() it will add all the errors to the 'stylesheet.errors' array.
