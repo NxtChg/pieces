@@ -1,0 +1,36 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>CSS parser/compiler test</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<style>
+	html, body { width: 99%; height: 99%; padding:0; }
+
+	#out{ width:100%; height:100%; }
+	</style>
+</head>
+<body>
+
+<textarea id="out"></textarea>
+
+<script src="css_parse.js"></script>
+<script src="css_compile.js"></script>
+<script src="test.js"></script>
+
+<script>
+	//var css = 'html, body{ background: white }';
+
+	var tree = css_parse(css);
+	
+	console.log(tree); console.log(tree.stylesheet.rules.length);
+	
+	var result = css_compile(tree, '\n', function(node){ node.some = true; } );
+	
+	document.getElementById('out').value = result; //JSON.stringify(tree);
+	
+	//console.log(result);
+	
+</script>
+</body>
+</html>
