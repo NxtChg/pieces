@@ -43,8 +43,8 @@ function css_parse(css, silent)
 	{
 		whitespace(); while(css[0] == '}'){ error('extra closing bracket'); css = css.slice(1); whitespace(); }
 
-		var m = match(/^([^{]+)/);
-		
+		var m = match(/^(("(?:\\"|[^"])*"|'(?:\\'|[^'])*'|[^{])+)/);
+				
 		if(m) return m[0].trim() // remove all comments from selectors
 				.replace(/\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*\/+/g, '')
 				.replace(/"(?:\\"|[^"])*"|'(?:\\'|[^'])*'/g, function(m){ return m.replace(/,/g, '\u200C'); })

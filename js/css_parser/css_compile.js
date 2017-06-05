@@ -11,7 +11,7 @@ function css_compile(tree, delim, cb) // Example: css_compile(css_parse(text), '
 
 			var txt = this[n.type](n);
 			
-			buf += txt; if(txt.length && n.selectors) buf += delim;
+			if(txt){ buf += txt; if(txt.length && n.selectors) buf += delim; }
 		}
 		
 		return buf;
