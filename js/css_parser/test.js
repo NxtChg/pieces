@@ -23190,5 +23190,5 @@ tobi loki jane {
     {
         .test { display: flex; }
     }
-
+b{ ; ;font-weight:bold; ; }
 `;

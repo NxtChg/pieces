@@ -54,7 +54,9 @@ function css_parse(css, silent)
 
 	function declaration()
 	{
-		whitespace(); const comment_regexp = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
+		match(/^([;\s]*)+/); // ignore initial ; if any + whitespace
+
+		const comment_regexp = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
 
 		var prop = match(/^(\*?[-#\/\*\\\w]+(\[[0-9a-z_-]+\])?)\s*/); if(!prop) return;
 		
