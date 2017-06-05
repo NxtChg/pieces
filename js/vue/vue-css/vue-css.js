@@ -217,19 +217,23 @@ var VueCSS =
 
 				for(var i = 0; i < tree.stylesheet.errors.length; i++){ console.error('vue-css parsing error: ' + tree.stylesheet.errors[i].message); }
 
-				var prefix = '.' + id + ' ';
+				var prefix = '.' + id;
 
 				var out = css_compile(tree, '', function(node)
     	        {
     	        	if(node.selectors)
                     {
-                    	for(var i = 0; i < node.selectors.length; i++)
+                    	var ns = node.selectors;
+
+                    	for(var i = 0; i < ns.length; i++)
 						{
-							node.selectors[i] = prefix + node.selectors[i];
+							if(ns[i].indexOf(prefix) == 0 && ns[i].charCodeAt(prefix.length) < 33) continue;
+
+							ns[i] = prefix + ' ' + ns[i];
 						}
                     }
     	        });
-
+                    	        
 			 	s.innerText = out; // s.appendChild(document.createTextNode(out);
 	
 				document.getElementsByTagName('head')[0].appendChild(s);
