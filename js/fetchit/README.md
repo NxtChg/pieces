@@ -26,4 +26,4 @@ fetchit(url, [data, options]).then(function(r){...}).catch(function(error){...})
 * **method** - 'GET' or 'POST'
 * **timeout** - timeout in msec, default is 5000
 * **credentials** - 'include' or 'omit'
-* **headers** - optional HTTP headers
+* **headers** - additional HTTP headers
