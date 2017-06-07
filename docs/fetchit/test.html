@@ -1,0 +1,35 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>fetchit test</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<style>
+	html, body { width: 99%; height: 99%; padding:0; font-family: tahoma,arial; }
+
+	#out{ width:400px; height:400px; }
+	#error{ color:red; }
+	</style>
+	<script src="fetchit.js"></script>
+</head>
+<body>
+
+<div style="width:500px; margin:20px auto;">
+	<b>Response:<b><br><br>
+	<textarea id="out"></textarea><br><br>
+	<b>Error:</b> <span id=error><span>
+</div>
+
+<script>
+	var d = new FormData();
+	
+	d.append('a', 'aaa');
+	d.append('b', 'bbb');
+	
+	//fetchit('https://simtalk.org:444/api/test.php', d)
+	fetchit('https://simtalk.org:444/api/test.php', { a: 'aaa' }, { method:'post' })
+		.then (function(r){ document.getElementById('out').value = JSON.stringify(r); console.log(r); })
+		.catch(function(r){ document.getElementById('error').innerText = r; });
+</script>
+</body>
+</html>
