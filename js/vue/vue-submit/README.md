@@ -37,4 +37,4 @@ Simply add 'vue-submit.js' file into your project.
 
 (NOTE: The component adds "@keyframes spin" rule into your page CSS).
 
-See the "test.html" file for more examples of how to use it.
+See the "test/index.html" file for more examples of how to use it.
