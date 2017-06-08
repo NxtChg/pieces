@@ -15,15 +15,16 @@ http://nxtchg.github.io/pieces/vue/vue-submit/
 
 * **disabled** - Boolean, works the same as regular "disabled" attribute.
 * **progress** - Number, if (> 0 && < 100) the button will disable itself, and display progress bar and the spinning circle.
-* **autoProgress** - Number, if > 0 the button will display fake automatic progress (similar to vue-top-progress-bar and the like).
+* **autoProgress** - Number, if > 0 the button will display fake automatic progress (similar to vue-top-progress-bar).
 
-**autoProgress** determines the time in milliseconds to reach 100%. You should set it to your typical response time. Default is 3000 ms.
+**autoProgress** determines the time in milliseconds to reach 100%. You should set it to your typical response time.
+Default is 3000 ms.
 
 The progress bar will never reach 100%, however, and will be stuck at 95% until you set it manually to either 0 or 100, in which case the button will return to its normal state.
 
 If **autoProgress** is set to 0, you should provide the progress values yourself via the **progress** prop.
 
-If you don't want the progress bar to be displayed, set the **progress** to 0.1 and don't update it until finished (then set it back to 0).
+If you don't want the progress bar to be displayed, set the **progress** to 0.1 and don't update it until finished (then set it to 0).
 
 The automatic progression is logarithmic; this means the progress bar will move slower and slower as it goes higher.
 
