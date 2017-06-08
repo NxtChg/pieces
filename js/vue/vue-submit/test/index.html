@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue-submit test</title>
+	<link rel="stylesheet" href="./assets/bootstrap.min.css">
+	<style>
+		#app{ width:450px; text-align:center; margin: 200px auto; }
+	</style>
+</head>
+<body>
+<div id="app">
+	<span style="width:300px; font-size:16px; display:inline-block; margin-bottom:10px;">Click the buttons:</span>
+	<form method="get" @submit.prevent="onSubmit">
+		<div class="form-group">
+			<vue-submit class="btn btn-primary btn-xs"    :disabled='dis' :progress='progress'  :auto-progress=2000>Button 1</vue-submit>
+			<vue-submit class="btn btn-info btn-sm"       :disabled='dis' :progress='progress'  :auto-progress=2000>Button 2</vue-submit>
+			<vue-submit class="btn btn-warning"           :disabled='dis' :progress='progress'  :auto-progress=2000>Button 3</vue-submit>
+			<vue-submit class="btn btn-danger btn-lg"     :disabled='dis' :progress='progress'  :auto-progress=2000>Button 4</vue-submit><br><br>
+			<vue-submit class="btn btn-success btn-block" :disabled='dis' :progress='progress2' :auto-progress=0 @click.prevent="but2">Submit Form</vue-submit>
+		</div>
+	</form>
+</div>
+<script src="./assets/vue.min.js"></script>
+<script src="../vue-submit.js"></script>
+<script>
+	new Vue(
+	{
+		el: '#app',
+		
+		data: function(){ return { dis: false, progress: 0, progress2: 0 } },
+
+		methods:
+		{
+			onSubmit: function()
+			{
+				this.progress = 1;
+
+				var self = this; setTimeout(function(){ self.progress = 0; }, 3000);
+			},
+
+			but2: function()
+			{
+				var self = this; this.progress2++;
+
+				if(this.progress2 < 100) setTimeout(function(){ self.but2(); }, 50); else this.progress2 = 0;
+			}
+		}
+	});
+
+</script>
+</body>
+</html>
