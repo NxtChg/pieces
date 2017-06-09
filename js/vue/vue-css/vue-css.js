@@ -227,7 +227,7 @@ var VueCSS =
 
                     	for(var i = 0; i < ns.length; i++)
 						{
-							if(ns[i].indexOf(prefix) == 0 && ns[i].charCodeAt(prefix.length) < 33) continue;
+							if(ns[i].indexOf(prefix) == 0 && (ns[i].length == prefix.length || ns[i].charCodeAt(prefix.length) < 33)) continue;
 
 							ns[i] = prefix + ' ' + ns[i];
 						}
