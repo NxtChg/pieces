@@ -21,7 +21,12 @@ Simply add 'vs-crumbs.js' file into your project and insert one or more tags any
 <vs-crumbs></vs-crumbs>
 ```
 
-By default, the component uses router path to display breadcrumbs names.
+Then style your separator:
+```css
+.vs-crumbs a:after{ padding: 0 12px; color: #888; content: "/"; }
+```
+
+By default, the component uses router path to display breadcrumb names.
 
 You can override this with custom names by using **meta.crumbs**:
 
