@@ -1,13 +1,13 @@
 
 # Very simple Vue breadcrumbs in 40 lines of code
 
-Works with multi-level paths without the need for child views. For example: "/foo/bar" and "/foo/boo" or even "/foo/:id" can all be used at the same level with a single <router-view>. Supports child views too.
+Works with multi-level paths without the need for child views. For example: "/foo/bar" and "/foo/boo" or even "/foo/:id" can all be used at the same level with a single router-view. Supports child views too.
 
 Requires: [vue-router](https://github.com/vuejs/vue-router).
 
 ## Live Demo
 
-http://nxtchg.github.io/pieces/vue/vs-crumbs/
+https://nxtchg.github.io/pieces/vue/vs-crumbs/#/foo/bar
 
 ## Props
 
