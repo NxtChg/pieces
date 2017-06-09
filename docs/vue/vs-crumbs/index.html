@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue-submit test</title>
+	<style>
+		#app{ width:500px; text-align:left; margin: 200px auto; font-family: arial; font-size:16px; }
+
+		a{ color:#17f; font-family: Armata, Verdana; text-decoration: none; }
+		a:hover{ color:#F20; text-decoration:none; }
+
+		.vs-crumbs      { font-size:125%; font-family: Armata, Verdana; }
+		.vs-crumbs .last{ opacity:0.66; }
+		.vs-crumbs a:after{ margin-left:8px; width:0; height:0; display:inline-block; border:5px solid transparent; border-left:5px solid #F50; content:"" }
+		#simple    a:after{ margin-right:12px; color: #888; content: "/"; border:none; }
+	</style>
+</head>
+<body>
+<div id="app">
+	<h4>Breadcrumbs</h4>
+	Simple: <vs-crumbs id="simple"></vs-crumbs><br><br>
+	Arrows: <vs-crumbs root="sweet"></vs-crumbs><br>
+
+	<h4>View</h4>
+	<div style="width:500px; height:200px; background:#eee; padding:12px;">
+		<router-view></router-view>
+	</div>
+
+	<br><br><b>Navigation:</b>
+	<router-link to="/">Home</router-link> |
+	<router-link to="/users">Users</router-link> |
+	<router-link to="/users/nxtchg">User</router-link> |
+	<router-link to="/foo">Foo</router-link> |
+	<router-link to="/foo/bar">Bar</router-link> |
+	<router-link to="/foo/boo">Boo</router-link> |
+	<router-link to="/not_found">404</router-link> |
+	<router-link to="/about">About</router-link>
+</div>
+<script src="./assets/vue.min.js"></script>
+<script src="./assets/vue-router.js"></script>
+<script src="../vs-crumbs.js"></script>
+<script>
+
+const pgHome  = { template: '<div>HOME</div>' };
+const pgAbout = { template: '<div>About</div>' };
+const pg404   = { template: '<div>Error 404: not found!</div>' };
+const Foo     = { template: '<div>foo</div>' };
+const FooBar  = { template: '<div>foo:bar</div>' };
+const FooBoo  = { template: '<div>foo:boo</div>' };
+
+const router = new VueRouter(
+{
+	routes:
+	[
+		{ path: '/', component: pgHome },
+	 	{ path: '/users/:id?', component: { template: '<div>USER: "{{id}}"</div>', props: ['id'] }, props: true, meta: { crumbs: '/My Users'}  },
+
+		{ path: '/foo',     component: Foo },
+		{ path: '/foo/bar', component: FooBar, meta: { crumbs: '/My Foo/My Bar'} },
+		{ path: '/foo/boo', component: FooBoo, meta: { crumbs: '/My Foo/My Boo'} },
+		{ path: '/about',   component: pgAbout },
+
+		{ path: '*', component: pg404 }
+	],
+});//__________________________________________________________________________
+
+	new Vue({ el: '#app', router: router });
+
+</script>
+</body>
+</html>
