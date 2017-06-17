@@ -1,5 +1,5 @@
 
-# Vue plugin for storing relevant CSS with components
+# Vue plugin that allows you to bundle relevant CSS with your components
 
 ## Rationale
 
@@ -26,4 +26,10 @@ This means that the root element of your component must have the same class as i
 
 ## Usage
 
-Simply add 'vue-css.js' file into your project.
+Simply add 'vue-css.js' file to your page.
+
+If you want to override component styles, add ```<style type="text/css" id="vue-styles"></style>``` to the page header.
+
+The plugin will put all the component styles there and you can then add styles above or below to either inherit or override them.
+
+NOTE: Selectors inside nested at-rules, like @media, are not processed, so you need to prefix them with your root class manually.
