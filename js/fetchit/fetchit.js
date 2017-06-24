@@ -12,7 +12,7 @@ function fetchit(url, data, options)
 
 		var xhr = new XMLHttpRequest;
 
-		var ue = false, method = (options.method || 'GET');
+		var ue = false, method = (options.method || 'GET').toUpperCase();
 
 		if(data instanceof FormData)
 		{
@@ -29,7 +29,7 @@ function fetchit(url, data, options)
 			}
 		}
 
-		xhr.open(method.toUpperCase(), url, true);
+		xhr.open(method, url, true);
 
 		xhr.onreadystatechange = function()
 		{
