@@ -37,7 +37,9 @@ function fetchit(url, data, options)
 
 			if(this.status === 200)
 			{
-				resolve(JSON.parse(this.responseText));
+				try{ var r = JSON.parse(this.responseText); } catch(e){ reject('bad response'); return; }
+
+				resolve(r);
 			}
 			else
 			{
