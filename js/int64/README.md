@@ -5,7 +5,7 @@
 
 A simple class to allow 64-bit calculations in Javascript. _Not a polyfill._
 
-More info: ...
+More info: https://medium.com/@nxtchg/simplifying-int64-polyfill-4a9c35441e25
 
 ## Usage
 
