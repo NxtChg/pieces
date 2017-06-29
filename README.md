@@ -4,6 +4,8 @@ Simple, stand-alone, reusable components.
 
 ## JavaScript
 
+* [**jslib**](/js/jslib) - a simple helper library
+
 * [**Simple CSS parser**](https://github.com/NxtChg/pieces/tree/master/js/css_parser)
 * [**fetchit**](https://github.com/NxtChg/pieces/tree/master/js/fetchit) - a simple version of fetch() based on XMLHttpRequest
 * [**Int64**](/js/int64) - a simple class to allow 64-bit calculations in Javascript
