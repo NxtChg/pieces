@@ -13,7 +13,10 @@ js.get_cookie = function(name)
 	{
 		var c = arr[i], p = -1; while(c.charCodeAt(++p) < 33);
 		
-		if(c.indexOf(name+'=', p) == p) return c.substr(p + name.length + 1);
+		if(c.indexOf(name+'=', p) == p)
+		{
+			return decodeURIComponent(c.substr(p + name.length + 1));
+		}
 	}
 };//___________________________________________________________________________
 
@@ -28,7 +31,7 @@ js.set_cookie = function(name, val, days, path) // (name, "", -1) to delete a co
 		v += '; expires=' + d.toUTCString();
 	}
 
-	if(path) v += '; path=' + enc(path);
+	if(path) v += '; path=' + path;
 
 	document.cookie = enc(name) + '=' + v; // + '; Secure'
 };//___________________________________________________________________________
