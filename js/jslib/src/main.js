@@ -4,4 +4,4 @@
 
 var js = {}; // it all starts with a small first step
 
-function defined(a){ return typeof(a) != 'undefined'; }
+function defined(a){ return (a !== void 0 && a !== null); }
