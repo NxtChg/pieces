@@ -33,3 +33,12 @@ js.set_cookie = function(name, val, days, path) // (name, "", -1) to delete a co
 	document.cookie = enc(name) + '=' + v; // + '; Secure'
 };//___________________________________________________________________________
 
+js.check_cookies = function()
+{
+	var n = 'testcookie';
+
+	if(navigator.cookieEnabled)
+	{
+		js.set_cookie(n,1); if(js.get_cookie(n)){ js.set_cookie(n, '', -1); return true; }
+	}
+};//___________________________________________________________________________
