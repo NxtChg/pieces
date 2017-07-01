@@ -26,12 +26,12 @@ Vue.component('vs-crumbs',
 
 			for(var i = 1; i < r.length; i++)
 			{
-		        var name = (m[i] || r[i]); if(r[i] == '') continue;
+				var name = (m[i] || r[i]); if(r[i] == '') continue;
 
 				title += ' : '+ name;
 				path  += '/'  + name;
 		
-		        cs.push({ name: name, path: path });
+				cs.push({ name: name, path: path });
 			}
 
 			window.document.title = title;
