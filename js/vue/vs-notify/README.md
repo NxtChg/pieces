@@ -60,15 +60,16 @@ You can use the slot "body" for custom notifications:
 
 ## Styling
 
+```css
 .vs-notify .ntf{ /* main notification container */ }
 
 .vs-notify .ntf.success { }
 .vs-notify .ntf.warn    { }
 .vs-notify .ntf.error   { }
+```
 
 You can also use your own notification types:
 
 `this.$notify("alert", "Where are my keys?!", "panic");`
 
-.vs-notify .panic{ color: red; }
-
+`.vs-notify .panic{ color: red; }`
