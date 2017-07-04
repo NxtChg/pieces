@@ -7,7 +7,7 @@ https://nxtchg.github.io/pieces/vue/vs-notify/
 
 ## Usage
 
-Simply add 'vs-notify.js' file into your project and insert one or more tags anywhere:
+Simply add "vs-notify.min.js" file into your project and insert one or more tags anywhere:
 
 ```html
 <vs-notify group="alert"></vs-notify>

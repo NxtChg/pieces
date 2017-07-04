@@ -30,7 +30,7 @@ The automatic progression is logarithmic; this means the progress bar will move 
 
 ## Usage
 
-Simply add 'vue-submit.js' file into your project.
+Simply add "vue-submit.min.js" file into your project.
 
 ```html
 <vue-submit class="btn btn-primary" :progress="progress">Send</vue-submit>
