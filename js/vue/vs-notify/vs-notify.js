@@ -1,3 +1,6 @@
+/*=============================================================================
+  Created by NxtChg (admin@nxtchg.com), 2017. License: Public Domain.
+=============================================================================*/
 
 var s = document.createElement("style"); s.type = 'text/css';
 
