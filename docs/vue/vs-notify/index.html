@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vs-notify test</title>
+	<style>
+	body{ padding:15px 33%; }
+
+	#app{ text-align:center; margin: 180px auto; font-family: arial; font-size:16px; }
+
+	button{ width:120px; padding: 5px 12px; margin:5px; font-size:14px; }
+	
+	.vs-notify h4{ font-weight: bold; font-size:16px; margin:0; margin-bottom:4px; }
+	
+	/* Singleton */
+	
+	.vs-notify.single .ntf{ border:none; border:1px solid green; text-align:center; background:#5a5; }
+	
+	/* Custom notifications style */
+	
+	.vs-notify.custom .ntf
+	{
+		border:none; border-radius: 7px; font-size: 14px; padding: 10px; color: #5A6B81; background: #E5EBF1; cursor:default;
+	}
+	
+	.vs-notify.custom .title{ position: relative; color: white; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; background: #17f; padding: 8px; }
+	
+	.vs-notify.custom .close
+	{
+		width: 20px; height: 20px; line-height: 20px; position: absolute; top: 6px; right: 5px; cursor: pointer; color: red; font-weight: 900; border-radius: 4px;
+		
+		background: red; color: white; text-align: center;
+	}
+	
+	.vs-notify.custom .content{ padding:14px 2px 6px 2px; background: #EAE7ED; }
+	
+	/* Style 1 */
+	
+	.vs-notify.style1 { width:180px; }
+	
+	.vs-notify.style1 .ntf
+	{
+		color: #8898A5; padding: 12px; background: #FCFDFF; border: 1px solid #eaeefb; margin:8px;
+		box-shadow: 0 0 5px 0 rgba(232, 237, 250, 0.6), 0 3px 8px 0 rgba(232, 237, 250, 0.5);
+	}
+	.vs-notify.style1 h4 { color:red; font-weight: 600; }
+	
+	/* Style 2 */
+	
+	.vs-notify.style2 { width:80%; }
+	
+	.vs-notify.style2 .ntf
+	{
+		background: #444; border: 2px solid #fe0; border-radius:12px;
+		box-shadow: 0 0 9px 0 rgba(55, 55, 55, 0.7); font-size:16px; height:90px; margin:8px; margin-top:8px; padding:0;
+	}
+	.vs-notify.style2 .cnt{ padding:12px;}
+	.vs-notify.style2 h4 { color:#fe0; font-weight: 600; }
+	
+	/* Let's override ntf-bottom animation */
+	
+	.vs-notify.style2 .ntf-bottom-enter-active, .ntf-bottom-leave-active { transition: all 0.4s; }
+	.vs-notify.style2 .ntf-bottom-enter   { opacity:0; transform: none; height:0; margin-top:-12px; }
+	.vs-notify.style2 .ntf-bottom-leave-to{ opacity:0; transform: translateY(-95px); }
+
+	</style>
+</head>
+<body>
+<div id="app">
+
+	<vs-notify group="basic"></vs-notify>
+	<vs-notify group="single"   position="top center"></vs-notify>
+    <vs-notify group="reversed" position="bottom left"   :reverse="true"></vs-notify>
+    <vs-notify group="fade"     position="bottom center" :reverse="true" transition="ntf-fade"></vs-notify>
+
+	<vs-notify group="style1" position="top left"   :reverse="true" transition="ntf-top" :duration="1200"></vs-notify>
+	<vs-notify group="style2" position="center bottom" transition="ntf-bottom" :reverse="true"></vs-notify>
+
+    <vs-notify group="custom" position="bottom right" :duration="4000" :reverse="true">
+		<template slot="body" scope="props">
+			<div class="title">Title<div class="close" @click="props.close">x</div></div>
+			<div class="content">Look: <span class="content" v-html="props.item.text"></span>, <a href="http://google.com" target=_blank>Open Google?</a></div>
+		</template>
+    </vs-notify>
+
+	<div class="content">
+		<button @click="show('basic')"         >Default</button>
+		<button @click="show('basic', 'warn')" >Warning</button>
+		<button @click="show('basic', 'error')">Error</button><br>
+		<button @click="show_single" style="width:190px">Show singleton</button><button @click="hide_single" style="width:190px">Hide singleton</button>
+		<br><br><br>
+		<button @click="show('reversed', 'success')">Reversed</button>
+		<button @click="show('fade')">With fade</button>
+		<button @click="show_custom('notification text')">Custom</button><br>
+		<br>
+		<button @click="show2('style1')" style="width:190px">Styled (top)</button>
+		<button @click="show2('style2')" style="width:190px">Styled (bottom)</button><br>
+	</div>
+
+</div>
+
+<script src="./vuepack.js"></script>
+<script>
+
+var app = new Vue(
+{
+	el: '#app',
+
+	data:{ id: 0 },
+
+	methods:
+	{
+		show: function(group, type)
+		{
+			type = type || '';
+
+			var text =  '<h4>Test '+type+' notification #'+(this.id++)+'</h4>'+
+						'This is notification <span style="color:yellow">text</span>!';
+			
+			this.$notify(group, text, type);
+		},
+
+		show2: function(group){ this.$notify(group, '<div class=cnt><h4>Title #'+(this.id++)+'</h4>The text goes here, <br>and here.</div>'); },
+
+		show_custom: function(text){ this.$notify('custom', text, '', 0); },
+
+		show_single: function()
+		{
+			this.hide_single();
+
+			var self = this; setTimeout(function(){ self.$notify('single', 'This is a <b>singleton</b>!', '', 0); }, 5);
+		},
+
+		hide_single: function(){ this.$notify('single'); }
+	}
+});
+
+</script>
+</body>
+</html>
