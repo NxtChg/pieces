@@ -48,7 +48,7 @@ There are several predefined transitions:
 
 ## Custom notifications
 
-You can you slot "body" for custom notifications:
+You can use the slot "body" for custom notifications:
 
 ```html
 <template slot="body" scope="props">
