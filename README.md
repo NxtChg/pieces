@@ -2,6 +2,8 @@
 
 Simple, stand-alone, reusable components.
 
+<a class="twitter-follow-button" href="https://twitter.com/nxtchg">Follow me for latest updates</a>
+
 ## JavaScript
 
 * [**Simple CSS parser**](https://github.com/NxtChg/pieces/tree/master/js/css_parser)
