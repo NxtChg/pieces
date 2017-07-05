@@ -2,7 +2,7 @@
 
 Simple, stand-alone, reusable components.
 
-<a class="twitter-follow-button" href="https://twitter.com/nxtchg">Follow me for latest updates</a>
+<a class="twitter-follow-button" href="https://twitter.com/nxtchg">Follow me on Twitter for latest updates</a>
 
 ## JavaScript
 
