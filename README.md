@@ -3,7 +3,6 @@
 Simple, stand-alone, reusable components.
 
 <a class="twitter-follow-button" href="https://twitter.com/nxtchg">Follow me for latest updates</a>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## JavaScript
 
