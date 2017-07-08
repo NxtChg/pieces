@@ -5,11 +5,8 @@
 var js = {}; // it all starts with a small first step
 
 function defined(a){ return (a !== void 0 && a !== null); }
-/*=============================================================================
-  Created by NxtChg (admin@nxtchg.com), 2017. License: Public Domain.
-=============================================================================*/
 
-var js = js || {};
+js.cb = function(obj, fn){ return function(){ return fn.apply(obj, arguments); }; }; // bind 'this' and function together
 //_____________________________________________________________________________
 
 js.get_cookie = function(name)
@@ -52,3 +49,30 @@ js.check_cookies = function()
 		js.set_cookie(n,1); if(js.get_cookie(n)){ js.set_cookie(n, '', -1); return true; }
 	}
 };//___________________________________________________________________________
+
+js.debounce = function(fn, delay) // execute with delay; if called again sooner the delay is reset
+{
+	return function()
+	{
+		clearTimeout(this.timer);
+		
+		var self = this, args = arguments;
+
+		this.timer = setTimeout(function(){ fn.apply(self, args); }, delay);
+	};
+};
+
+js.throttle = function(fn, delay, immediate) // execute with delay; if called again sooner the call is ignored
+{
+	return function()
+	{
+		if(this.timer) return;
+
+		var self = this, args = arguments;
+
+		if(immediate) fn.apply(self, args);
+
+		this.timer = setTimeout(function(){ self.timer = null; fn.apply(self, args); }, delay);
+	};
+};
+
