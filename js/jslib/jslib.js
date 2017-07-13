@@ -52,7 +52,7 @@ js.check_cookies = function()
 	}
 };//___________________________________________________________________________
 
-js.debounce = function(fn, delay) // returns a function to add delay to fn; if called again sooner the delay is reset
+js.debounced = function(fn, delay) // returns a version of fn with delay; if called again sooner the delay is reset
 {
 	return function()
 	{
@@ -64,7 +64,7 @@ js.debounce = function(fn, delay) // returns a function to add delay to fn; if c
 	};
 };
 
-js.throttle = function(fn, delay, immediate) // returns a function to add delay to fn; if called again sooner the call is ignored
+js.throttled = function(fn, delay, immediate) // returns a version of fn with delay; if called again sooner the call is ignored
 {
 	return function()
 	{
