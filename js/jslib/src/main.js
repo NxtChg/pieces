@@ -32,3 +32,6 @@ js.clone = function(obj) // any additional arguments will be added to the clone
 	return c;
 };//___________________________________________________________________________
 
+js.encode_utf8 = function(s){ return unescape(encodeURIComponent(s)); }; // JS str => utf-8
+js.decode_utf8 = function(s){ return decodeURIComponent(escape  (s)); }; // utf-8  => JS str
+//_____________________________________________________________________________
