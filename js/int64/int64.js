@@ -10,10 +10,7 @@ const POW2_64 = Math.pow(2, 64);
 
 function Int64(v, low)
 {
-	this.hi = this.lo = 0;
-
-	if(h !== undefined){ this.lo = low; this.hi = v; } else
-	if(v !== undefined){ this.from(v); }
+	this.hi = this.lo = 0; if(v !== undefined) this.from(v, low);
 }//____________________________________________________________________________
 
 Int64.prototype.is_eq  = function(v){ return (this.hi == v.hi && this.lo == v.lo); };
@@ -82,8 +79,9 @@ Int64.prototype.xor = function(v)
 };
 //_____________________________________________________________________________
 
-Int64.prototype.from = function(v)
+Int64.prototype.from = function(v, low)
 {
+	if(low !==  undefined){ this.hi = v;    this.lo = low;  return this; }
 	if(v instanceof Int64){ this.hi = v.hi; this.lo = v.lo; return this; }
 
 	var vi = Math.floor(Math.abs(v)) % POW2_64;
