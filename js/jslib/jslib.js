@@ -36,6 +36,19 @@ js.encode_utf8 = function(s){ return unescape(encodeURIComponent(s)); }; // JS s
 js.decode_utf8 = function(s){ return decodeURIComponent(escape  (s)); }; // utf-8  => JS str
 //_____________________________________________________________________________
 
+window.escape = window.escape || function(s)
+{
+    return s.replace(/[^\w@\*\-\+\.\/]/g, function(c)
+    {
+    	c = '000' + c.charCodeAt(0).toString(16).toUpperCase(); return (c.length < 6 ? '%'+c.slice(-2) : '%u'+c.slice(-4));
+    });
+};//___________________________________________________________________________
+
+window.unescape = window.unescape || function(s)
+{
+	return s.replace(/%u([\da-f]{4})|%([\da-f]{2})/gi, function(m,l,s){ return String.fromCharCode(parseInt(l||s, 16)); });
+};//___________________________________________________________________________
+
 js.get_cookie = function(name)
 {
 	var arr = document.cookie.split(';');
