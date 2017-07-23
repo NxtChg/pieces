@@ -2,9 +2,18 @@
 const POW2_32 = Math.pow(2, 32);
 const POW2_64 = Math.pow(2, 64);
 
-function Int64(v)
+/* Constructors:
+	- Int64(123)
+	- Int64(Int64)
+	- Int64(hi,lo)
+*/
+
+function Int64(v, low)
 {
-	this.hi = this.lo = 0; if(typeof(v) != 'undefined') this.from(v);
+	this.hi = this.lo = 0;
+
+	if(h !== undefined){ this.lo = low; this.hi = v; } else
+	if(v !== undefined){ this.from(v); }
 }//____________________________________________________________________________
 
 Int64.prototype.is_eq  = function(v){ return (this.hi == v.hi && this.lo == v.lo); };
