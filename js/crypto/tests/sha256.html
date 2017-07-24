@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SHA-256 test</title>
+	<script src="../sha256.js"></script>
+</head>
+<body style="font-size:18px; font-family:sans-serif;">
+
+<span id='result'>Testing... (see console)</span>
+
+<script>
+
+function decode_utf8(s){ return decodeURIComponent(  escape(s)); }; // utf-8  => JS str
+function encode_utf8(s){ return unescape(encodeURIComponent(s)); }; // JS str => utf-8
+//_____________________________________________________________________________
+
+var str = 'this is a test';
+
+var b1 = [], b2 = new Uint8Array(str.length);
+
+for(var i = 0; i < str.length; i++){ b1[i] = b2[i] = str.charCodeAt(i); }
+
+var long = 'function defined(e){return void 0!==e&&null!==e}var js={};js.$=function(e){return document.getElementById(e)},js.is_array=function(e){return e&&e.constructor===Array},js.cb=function(e,n){return function(){return n.apply(e,arguments)}},js.clone=function(e){if(null===e||"object"!=typeof e)return e;for(var n=arguments,t=new e.constructor,o=0;o<n.length;o++)for(var r in n[o])n[o].hasOwnProperty(r)&&(t[r]=js.clone(n[o][r]));return t},js.encode_utf8=function(e){return unescape(encodeURIComponent(e))},js.decode_utf8=function(e){return decodeURIComponent(escape(e))},window.escape=window.escape||function(e){return e.replace(/[^\\w@\\*\\-\\+\\.\\/]/g,function(e){return e="000"+e.charCodeAt(0).toString(16).toUpperCase(),e.length<6?"%"+e.slice(-2):"%u"+e.slice(-4)})},window.unescape=window.unescape||function(e){return e.replace(/%u([\\da-f]{4})|%([\\da-f]{2})/gi,function(e,n,t){return String.fromCharCode(parseInt(n||t,16))})},js.get_cookie=function(e){for(var n=document.cookie.split(";"),t=0;t<n.length;t++){for(var o=n[t],r=-1;o.charCodeAt(++r)<33;);if(o.indexOf(e+"=",r)==r)return decodeURIComponent(o.substr(r+e.length+1))}},js.set_cookie=function(e,n,t,o){var r=encodeURIComponent,i=r(n);if(t){var c=new Date;c.setDate(c.getDate()+t),i+="; expires="+c.toUTCString()}o&&(i+="; path="+o),document.cookie=r(e)+"="+i},js.check_cookies=function(){var e="testcookie";if(navigator.cookieEnabled&&(js.set_cookie(e,1),js.get_cookie(e)))return js.set_cookie(e,"",-1),!0},js.debounce=function(e,n){return function(){clearTimeout(this.timer);var t=this,o=arguments;this.timer=setTimeout(function(){e.apply(t,o)},n)}},js.throttle=function(e,n,t){return function(){if(!this.timer){var o=this,r=arguments;t&&e.apply(o,r),this.timer=setTimeout(function(){o.timer=null,e.apply(o,r)},n)}}};';
+
+if(SHA256('')       != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855') throw('SHA256: "" mismatch!');
+if(SHA256('abc')    != 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad') throw('SHA256: "abc" mismatch!');
+if(SHA256(long)     != 'fb0ccc8d62c60b0789d1eafef0225b4b13f8330afb654c8e682180e083e4d0b7') throw('SHA256: long  mismatch!');
+if(SHA256(b1, true) != '2E99758548972A8E8822AD47FA1017FF72F06F3FF6A016851F45C398732BC50C') throw('SHA256: Array mismatch!');
+if(SHA256(b2, true) != '2E99758548972A8E8822AD47FA1017FF72F06F3FF6A016851F45C398732BC50C') throw('SHA256: Uint8 mismatch!');
+//_____________________________________________________________________________
+
+var t0 = performance.now();
+
+for(var i = 0; i < 10000; i++)
+{
+	var r = SHA256(str);
+}
+
+var t1 = performance.now(); console.log('10K hashes = ' + (t1-t0).toFixed(0) + ' ms');
+
+console.log(r); if(r != '2e99758548972a8e8822ad47fa1017ff72f06f3ff6a016851f45c398732bc50c') throw('SHA256: test mismatch!');
+
+function random_str(len)
+{
+	var r = '';
+
+	for(var i = 0; i < len; i++){ r += String.fromCharCode(Math.random() * 256); }
+
+	return r;
+}//____________________________________________________________________________
+
+for(var i = 0; i < 100; i++)
+{
+	r = SHA256(random_str((13571*Math.random())|0));
+}
+
+console.log(r);
+
+document.getElementById('result').innerHTML = 'All tests passed. See console for more info.';
+
+</script>
+</body>
+</html>
