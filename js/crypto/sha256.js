@@ -60,10 +60,10 @@ function SHA256(s, uppercase) // 's' can be a string, Uint8Array or regular JS a
 	{
 		var out, p = idx << 2;
 
-		out  = (s.charCodeAt(p+0) & 255) << 24;
-		out |= (s.charCodeAt(p+1) & 255) << 16;
-		out |= (s.charCodeAt(p+2) & 255) << 8;
-		out |= (s.charCodeAt(p+3) & 255);
+		out  =  (s.charCodeAt(p+0) & 255) << 24 |
+				(s.charCodeAt(p+1) & 255) << 16 |
+				(s.charCodeAt(p+2) & 255) <<  8 |
+				(s.charCodeAt(p+3) & 255);
 
 		if(idx == (bitlen >> 5)){ out |= 0x80 << (24 - (bitlen & 31)); }
 
