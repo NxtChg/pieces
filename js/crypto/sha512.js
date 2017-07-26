@@ -96,7 +96,16 @@ p.hash2hex = function(b, uppercase) // for some weird reason it's much faster he
 	}
 
 	return str;
-}//___________________________________________________________________________
+};//__________________________________________________________________________
+
+p.hash2bin = function(b)
+{
+	var i, r = new Array(64);
+
+	for(i = 0; i < 64; i++){ r[i] = (b[i>>2] >> (24 - ((i&3)<<3))) & 0xFF; }
+
+	return r;
+};//___________________________________________________________________________
 
 function SHA512(s, out)
 {
@@ -166,5 +175,5 @@ function SHA512(s, out)
 		add(H, 8, e); add(H,10, f); add(H,12, g); add(H,14, h);
 	}
 
-	return (out == 'bin' ? H : p.hash2hex(H, out));
+	return (out == 'bin' ? p.hash2bin(H) : p.hash2hex(H, out));
 }
