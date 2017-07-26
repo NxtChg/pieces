@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SHA-512 test</title>
+	<script src="../sha512.js"></script>
+</head>
+<body style="font-size:18px; font-family:sans-serif;">
+
+<span id='result'>Testing... (see console)</span>
+
+<script>
+
+function decode_utf8(s){ return decodeURIComponent(  escape(s)); }; // utf-8  => JS str
+function encode_utf8(s){ return unescape(encodeURIComponent(s)); }; // JS str => utf-8
+//_____________________________________________________________________________
+
+var str = 'this is a test';
+
+var b1 = [], b2 = new Uint8Array(str.length);
+
+for(var i = 0; i < str.length; i++){ b1[i] = b2[i] = str.charCodeAt(i); }
+
+var long = 'function defined(e){return void 0!==e&&null!==e}var js={};js.$=function(e){return document.getElementById(e)},js.is_array=function(e){return e&&e.constructor===Array},js.cb=function(e,n){return function(){return n.apply(e,arguments)}},js.clone=function(e){if(null===e||"object"!=typeof e)return e;for(var n=arguments,t=new e.constructor,o=0;o<n.length;o++)for(var r in n[o])n[o].hasOwnProperty(r)&&(t[r]=js.clone(n[o][r]));return t},js.encode_utf8=function(e){return unescape(encodeURIComponent(e))},js.decode_utf8=function(e){return decodeURIComponent(escape(e))},window.escape=window.escape||function(e){return e.replace(/[^\\w@\\*\\-\\+\\.\\/]/g,function(e){return e="000"+e.charCodeAt(0).toString(16).toUpperCase(),e.length<6?"%"+e.slice(-2):"%u"+e.slice(-4)})},window.unescape=window.unescape||function(e){return e.replace(/%u([\\da-f]{4})|%([\\da-f]{2})/gi,function(e,n,t){return String.fromCharCode(parseInt(n||t,16))})},js.get_cookie=function(e){for(var n=document.cookie.split(";"),t=0;t<n.length;t++){for(var o=n[t],r=-1;o.charCodeAt(++r)<33;);if(o.indexOf(e+"=",r)==r)return decodeURIComponent(o.substr(r+e.length+1))}},js.set_cookie=function(e,n,t,o){var r=encodeURIComponent,i=r(n);if(t){var c=new Date;c.setDate(c.getDate()+t),i+="; expires="+c.toUTCString()}o&&(i+="; path="+o),document.cookie=r(e)+"="+i},js.check_cookies=function(){var e="testcookie";if(navigator.cookieEnabled&&(js.set_cookie(e,1),js.get_cookie(e)))return js.set_cookie(e,"",-1),!0},js.debounce=function(e,n){return function(){clearTimeout(this.timer);var t=this,o=arguments;this.timer=setTimeout(function(){e.apply(t,o)},n)}},js.throttle=function(e,n,t){return function(){if(!this.timer){var o=this,r=arguments;t&&e.apply(o,r),this.timer=setTimeout(function(){o.timer=null,e.apply(o,r)},n)}}};';
+
+if(SHA512('')        != 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e') throw('SHA512: "" mismatch!');
+if(SHA512('abc')     != 'ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f') throw('SHA512: "abc" mismatch!');
+if(SHA512(long)      != 'c16b62cc7bca239734aff18809a185a95a8d31e64af7acd7c1aa50cd42b8e41a2841fc64710d8bce813942710c859c6b8705715e863a524a3dcbb7ed6bb9f9b7') throw('SHA512: long  mismatch!');
+if(SHA512(b1, 'HEX') != '7D0A8468ED220400C0B8E6F335BAA7E070CE880A37E2AC5995B9A97B809026DE626DA636AC7365249BB974C719EDF543B52ED286646F437DC7F810CC2068375C') throw('SHA512: Array mismatch!');
+if(SHA512(b2, 'HEX') != '7D0A8468ED220400C0B8E6F335BAA7E070CE880A37E2AC5995B9A97B809026DE626DA636AC7365249BB974C719EDF543B52ED286646F437DC7F810CC2068375C') throw('SHA512: Uint8 mismatch!');
+//_____________________________________________________________________________
+
+var t0 = performance.now();
+
+for(var i = 0; i < 10000; i++)
+{
+	var r = SHA512(str);
+}
+
+var t1 = performance.now(); console.log('10K hashes = ' + (t1-t0).toFixed(0) + ' ms');
+
+console.log(r); if(r != '7d0a8468ed220400c0b8e6f335baa7e070ce880a37e2ac5995b9a97b809026de626da636ac7365249bb974c719edf543b52ed286646f437dc7f810cc2068375c') throw('SHA512: test mismatch!');
+
+function random_str(len)
+{
+	var r = '';
+
+	for(var i = 0; i < len; i++){ r += String.fromCharCode(Math.random() * 256); }
+
+	return r;
+}//____________________________________________________________________________
+
+for(var i = 0; i < 100; i++)
+{
+	r = SHA512(random_str((13571*Math.random())|0));
+}
+
+console.log(r);
+
+document.getElementById('result').innerHTML = 'All tests passed. See console for more info.';
+
+</script>
+</body>
+</html>
