@@ -81,9 +81,9 @@ p.K = [ 0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd, 0xb5c0fbcf, 0xec4d3b2f, 
 
 p.w = new Array(90); for(var i = 0; i < 90; i++) p.w[i] = new _i64();
 
-p.hash2hex = function(b, uppercase) // for some weird reason it's much faster here
+p.hash2hex = function(b, out) // for some weird reason it's much faster here
 {
-	var str = '', hex = (uppercase ? '0123456789ABCDEF' : '0123456789abcdef');
+	var str = '', hex = (out == 'HEX' ? '0123456789ABCDEF' : '0123456789abcdef');
 
 	for(var i = 0; i < 16; i++)
 	{
