@@ -1,6 +1,7 @@
 /*=============================================================================
   Created by NxtChg (admin@nxtchg.com), 2017. License: Public Domain.
 =============================================================================*/
+'use strict';
 
 // 's' can be a string, Uint8Array or regular JS array
 
