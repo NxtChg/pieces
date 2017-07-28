@@ -3,11 +3,10 @@
 =============================================================================*/
 'use strict';
 
-// 's' can be a string, Uint8Array or regular JS array
-
+// 'msg' can be a string, Uint8Array or regular JS array
 // 'out' can be 'bin', 'hex' or 'HEX'
 
-function SHA256(s, out)
+function SHA256(msg, out)
 {
 	function hash2hex(b)
 	{
@@ -26,13 +25,13 @@ function SHA256(s, out)
 		return str;
 	}//___________________________________________________________________________
 
-	var bitlen = s.length * 8, last = (((bitlen + 64) >> 9) << 4) + 15;
+	var bitlen = msg.length * 8, last = (((bitlen + 64) >> 9) << 4) + 15;
 
-	//if(typeof(s) == 'string'){ s = unescape(encodeURIComponent(s)); } // encode UTF-8  <-- this should probably be outside...
+	//if(typeof(msg) == 'string'){ msg = unescape(encodeURIComponent(msg)); } // encode UTF-8  <-- this should probably be outside...
 
 	function read_str(idx)
 	{
-		var p = idx << 2, out = (p < s.length ? s.charCodeAt(p) << 24 | s.charCodeAt(p+1) << 16 | s.charCodeAt(p+2) << 8 | s.charCodeAt(p+3) : 0);
+		var p = idx << 2, out = (p < msg.length ? msg.charCodeAt(p) << 24 | msg.charCodeAt(p+1) << 16 | msg.charCodeAt(p+2) << 8 | msg.charCodeAt(p+3) : 0);
 
 		if(idx == (bitlen >> 5)){ out |= 0x80 << (24 - (bitlen & 31)); }
 
@@ -41,14 +40,14 @@ function SHA256(s, out)
  
 	function read_bytes(idx)
 	{
-		var p = idx << 2, out = (p < s.length ? (s[p] << 24) | (s[p+1] << 16) | (s[p+2] << 8) | s[p+3] : 0);
+		var p = idx << 2, out = (p < msg.length ? (msg[p] << 24) | (msg[p+1] << 16) | (msg[p+2] << 8) | msg[p+3] : 0);
 
 		if(idx == (bitlen >> 5)){ out |= 0x80 << (24 - (bitlen & 31)); }
 
 		return out;
 	}
 
-	var read = (typeof(s) == 'string' ? read_str : read_bytes), len = last+1
+	var read = (typeof(msg) == 'string' ? read_str : read_bytes), len = last+1
 
 	var a, b, c, d, e, f, g, h, i, j, p, t, w = new Array(64);
 

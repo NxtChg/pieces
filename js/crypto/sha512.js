@@ -108,7 +108,10 @@ p.hash2bin = function(b)
 	return r;
 };//___________________________________________________________________________
 
-function SHA512(s, out)
+// 'msg' can be a string, Uint8Array or regular JS array
+// 'out' can be 'bin', 'hex' or 'HEX'
+
+function SHA512(msg, out)
 {
 	function add(x, idx, y)
 	{
@@ -120,13 +123,13 @@ function SHA512(s, out)
 
 	var H = [0x6a09e667, 0xf3bcc908, 0xbb67ae85, 0x84caa73b, 0x3c6ef372, 0xfe94f82b, 0xa54ff53a, 0x5f1d36f1, 0x510e527f, 0xade682d1, 0x9b05688c, 0x2b3e6c1f, 0x1f83d9ab, 0xfb41bd6b, 0x5be0cd19, 0x137e2179];
 
-	var bitlen = s.length * 8, last = (((bitlen + 128) >> 10) << 5) + 31;
+	var bitlen = msg.length * 8, last = (((bitlen + 128) >> 10) << 5) + 31;
 
-	//if(typeof(s) == 'string'){ s = unescape(encodeURIComponent(s)); } // encode UTF-8  <-- this should probably be outside...
+	//if(typeof(msg) == 'string'){ msg = unescape(encodeURIComponent(msg)); } // encode UTF-8  <-- this should probably be outside...
 
 	function read_str(idx)
 	{
-		var p = idx << 2, out = (p < s.length ? s.charCodeAt(p) << 24 | s.charCodeAt(p+1) << 16 | s.charCodeAt(p+2) << 8 | s.charCodeAt(p+3) : 0);
+		var p = idx << 2, out = (p < msg.length ? msg.charCodeAt(p) << 24 | msg.charCodeAt(p+1) << 16 | msg.charCodeAt(p+2) << 8 | msg.charCodeAt(p+3) : 0);
 
 		if(idx == (bitlen >> 5)){ out |= 0x80 << (24 - (bitlen & 31)); }
 
@@ -135,14 +138,14 @@ function SHA512(s, out)
  
 	function read_bytes(idx)
 	{
-		var p = idx << 2, out = (p < s.length ? (s[p] << 24) | (s[p+1] << 16) | (s[p+2] << 8) | s[p+3] : 0);
+		var p = idx << 2, out = (p < msg.length ? (msg[p] << 24) | (msg[p+1] << 16) | (msg[p+2] << 8) | msg[p+3] : 0);
 
 		if(idx == (bitlen >> 5)){ out |= 0x80 << (24 - (bitlen & 31)); }
 
 		return out;
 	}
 
-	var read = (typeof(s) == 'string' ? read_str : read_bytes);
+	var read = (typeof(msg) == 'string' ? read_str : read_bytes);
 
 	var i, j, w = p.w, a = w[80], b = w[81], c = w[82], d = w[83], e = w[84], f = w[85], g = w[86], h = w[87], k = w[88], t = w[89];
 
