@@ -11,6 +11,7 @@ Simple, stand-alone, reusable components.
 * [**fetchit**](https://github.com/NxtChg/pieces/tree/master/js/fetchit) - a simple version of fetch() based on XMLHttpRequest
 * [**Int64**](/js/int64) - a simple class to allow 64-bit calculations in Javascript
 * [**crypto**](/js/crypto) - a collection of JS cryptographic primitives
+* [**btc_validate**](/js/bitcoin/validate) - Bitcoin address validation
 
 ## Vue.js
 
