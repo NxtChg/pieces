@@ -1,0 +1,22 @@
+<html>
+<body>
+See console.
+
+<script src="btc_validate.min.js"></script>
+
+<script>
+
+var adr = '1Jgt77gGxYBTv1vfJAxeFUpiR6rhz7UeDb';
+
+if(btc_validate('' ) == true) throw('Test 1 failed');
+if(btc_validate(adr) != true) throw('Test 2 failed');
+
+if(btc_validate('1Jgt77gGxYBTv1vfJAxeFUpiR6rhz7UeDs' ) == true) throw('Test 3 failed');
+if(btc_validate('1Jgt77gGxYBTv1vfJAxeFUpiR6rhz7UeD'  ) == true) throw('Test 4 failed');
+if(btc_validate('1Jgt77gGxYBTv1vfJAxeFUpiR6rhz7UeDbx') == true) throw('Test 5 failed');
+
+console.log('Test passed.');
+
+</script>
+</body>
+</html>
