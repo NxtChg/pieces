@@ -36,6 +36,18 @@ js.encode_utf8 = function(s){ return unescape(encodeURIComponent(s)); }; // JS s
 js.decode_utf8 = function(s){ return decodeURIComponent(escape  (s)); }; // utf-8  => JS str
 //_____________________________________________________________________________
 
+js.round = function(n, precision) // fixes nasty JS rounding and behaves like PHP round()
+{
+	var neg = (n < 0), factor = Math.pow(10, precision);
+
+	var t = Math.round(Math.abs(n) * factor);
+
+	return (neg ? -t : t) / factor;
+};//___________________________________________________________________________
+
+String.prototype.trim = String.prototype.trim || function(){ return this.replace(/(^\s+)|(\s+$)/g, ''); };
+//_____________________________________________________________________________
+
 window.escape = window.escape || function(s)
 {
     return s.replace(/[^\w@\*\-\+\.\/]/g, function(c)

@@ -1,4 +1,7 @@
 
+String.prototype.trim = String.prototype.trim || function(){ return this.replace(/(^\s+)|(\s+$)/g, ''); };
+//_____________________________________________________________________________
+
 window.escape = window.escape || function(s)
 {
     return s.replace(/[^\w@\*\-\+\.\/]/g, function(c)
