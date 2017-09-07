@@ -64,7 +64,7 @@ function css_parse(css, silent)
 		
 		if(!match(/^:\s*/)) return error("property missing ':'");
 		
-		var val = match(/^((?:\/\*.*?\*\/|'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?\)|[^};])+)/);
+		var val = match(/^((?:\/\*.*?\*\/|'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?['"]\)|[^};])+)/);
 		
 		var ret = { type: 'declaration', property: prop.replace(comment_regexp, ''), value: val ? val[0].replace(comment_regexp, '').trim() : '' };
 		
@@ -129,7 +129,7 @@ function css_parse(css, silent)
 
 	function rule()
 	{
-		var sel = selector(); if(!sel) return error('selector missing');
+		var sel = selector() || []; if(!sel.length) error('selector missing');
 		
 		return { type: 'rule', selectors: sel, declarations: declarations() };
 	}//___________________________________________________________________________
