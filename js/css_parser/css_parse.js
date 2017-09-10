@@ -63,8 +63,9 @@ function css_parse(css, silent)
 		prop = prop[0].trim();
 		
 		if(!match(/^:\s*/)) return error("property missing ':'");
-		
-		var val = match(/^((?:\/\*.*?\*\/|'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?['"]\)|[^};])+)/);
+
+		// Quotes regex repeats verbatim inside and outside parentheses
+		var val = match(/^((?:\/\*.*?\*\/|'(?:\\'|.)*?'|"(?:\\"|.)*?"|\((\s*'(?:\\'|.)*?'|"(?:\\"|.)*?"|[^)]*?)\s*\)|[^};])+)/);
 		
 		var ret = { type: 'declaration', property: prop.replace(comment_regexp, ''), value: val ? val[0].replace(comment_regexp, '').trim() : '' };
 		
