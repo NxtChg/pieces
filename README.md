@@ -19,3 +19,8 @@ Simple, stand-alone, reusable components.
 * [**vue-submit**](https://github.com/NxtChg/pieces/tree/master/js/vue/vue-submit) - simple implementation of Ladda in less than 90 lines of code
 * [**vs-crumbs**](https://github.com/NxtChg/pieces/tree/master/js/vue/vs-crumbs) - very simple breadcrumbs in 40 lines of code
 * [**vs-notify**](/js/vue/vs-notify) - tiny but powerful notification component
+
+## PHP
+
+* [**JsonAPI**](/php/bitcoin/api) - Bitcoin RPC interface
+* [**btc_validate**](/php/bitcoin/validate) - Bitcoin address validation
