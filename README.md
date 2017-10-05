@@ -24,3 +24,7 @@ Simple, stand-alone, reusable components.
 
 * [**JsonAPI**](/php/bitcoin/api) - Bitcoin RPC interface
 * [**btc_validate**](/php/bitcoin/validate) - Bitcoin address validation
+
+## C++
+
+* [**crypto**](/c++/crypto) - a collection of C++ cryptographic primitives
