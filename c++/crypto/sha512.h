@@ -2,6 +2,11 @@
   Created by NxtChg (admin@nxtchg.com), 2017. License: Public Domain.
 =============================================================================*/
 
+typedef unsigned char    byte;
+typedef unsigned __int64 uint64;
+
+#define till(a) for(int i = 0; i < (a); i++)
+
 #define ROTR64(x,c)	(((x) >> c) | ((x) << (64-c))) // _rotr64()
 
 #define STEP(a,b,c,d,e,f,g,h) \
