@@ -28,3 +28,4 @@ Simple, stand-alone, reusable components.
 ## C++
 
 * [**crypto**](/c++/crypto) - a collection of C++ cryptographic primitives
+* [**base64**](/c++/base64.h) - base64 encoding/decoding in 60 lines of code
