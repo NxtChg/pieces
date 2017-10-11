@@ -55,5 +55,5 @@ int base64_decode(char *str, byte *out, int size) // returns the number of bytes
 		}
 	}
 
-	return sz;
+	return (bits < 6 ? sz : -1);
 }//____________________________________________________________________________
