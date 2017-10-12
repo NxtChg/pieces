@@ -36,7 +36,7 @@ int base64_decode(char *str, byte *out, int size) // returns the number of bytes
 
 	while(*str)
 	{
-		char a = *str++; if(a > 0 && a < ' ') continue;
+		char a = *str++; if(a > 0 && a < 33) continue;
 
 		if(a != '=')
 		{
