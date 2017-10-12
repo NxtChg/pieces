@@ -38,7 +38,7 @@ int base64_decode(char *str, byte *out, int size) // returns the number of bytes
 	{
 		char a = *str++; if(a > 0 && a < ' ') continue;
 
-		if(a && a != '=')
+		if(a != '=')
 		{
 			if(a < 43 || a > 122) return -1; // bad character
 
