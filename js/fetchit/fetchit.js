@@ -37,7 +37,14 @@ function fetchit(url, data, options)
 
 			if(this.status === 200)
 			{
-				try{ var r = JSON.parse(this.responseText); } catch(e){ reject('bad response'); return; }
+				var r = this.responseText;
+
+				if(r.length > 1 && (r[0] == '{' || r[0] == '['))
+				{
+					try{ r = JSON.parse(r); } catch(e){ reject('bad response'); return; }
+
+					// if(r.error != 'ok') reject(r.error); else resolve(r);  // uncomment if you use 'error' member with 'ok' as success value
+				}
 
 				resolve(r);
 			}
@@ -47,7 +54,7 @@ function fetchit(url, data, options)
 			}
 		};
 
-		xhr.timeout = (options.timeout || 5000); // time in milliseconds
+		xhr.timeout = (options.timeout || 5) * 1000; // time in milliseconds
 
 		if(options.credentials === 'include'){ xhr.withCredentials = true;  } else
 		if(options.credentials === 'omit'   ){ xhr.withCredentials = false; }

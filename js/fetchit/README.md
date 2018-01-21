@@ -9,7 +9,7 @@ _Not a polyfill._
 
 The main difference is that it treats bad statuses (like 404 or 500) as errors, so you don't have to check response.ok in resolve(), which is retarded.
 
-It also treats any successful response as JSON and automatically parses it.
+If response starts with '{' or '[' it is automatically parsed as JSON.
 
 And it allows specifying timeout in 'options', which defaults to 5 seconds.
 
@@ -24,6 +24,6 @@ fetchit(url, [data, options]).then(function(r){...}).catch(function(error){...})
 **options**:
 
 * **method** - 'GET' or 'POST'
-* **timeout** - timeout in msec, default is 5000
+* **timeout** - timeout in seconds, default is 5
 * **credentials** - 'include' or 'omit'
 * **headers** - additional HTTP headers
