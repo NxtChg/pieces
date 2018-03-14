@@ -43,7 +43,7 @@ function fetchit(url, data, options)
 				{
 					try{ r = JSON.parse(r); } catch(e){ reject('bad response'); return; }
 
-					// if(r.error != 'ok') reject(r.error); else resolve(r);  // uncomment if you use 'error' member with 'ok' as success value
+					// if(r.error != 'ok'){ reject(r.error); return; }  // uncomment if you use 'error' member with 'ok' as success value
 				}
 
 				resolve(r);
