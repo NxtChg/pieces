@@ -84,8 +84,6 @@ function cashaddr2pk(adr) // returns payload, including the version byte
 
 	if(adr[0] != 'q' && adr[0] != 'p') return false;
 
-	var is_script_hash = (adr[0] == 'p');
-
 	var raw = [], alphabet = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 
 	for(var i = 0; i < adr.length; i++)
