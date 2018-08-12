@@ -4,7 +4,7 @@
 	<title>CashAddr Translator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
-    body{ font-size:24px; font-family:sans-serif; padding:40px; background:#f5f5f5; }
+    body{ font-size:16px; font-family:sans-serif; padding:40px; background:#f5f5f5; }
     input, button{ padding:6px 12px; font-size:18px; }
     input{ width:500px; }
     </style>
@@ -12,20 +12,33 @@
     <script src="cashaddr.js"></script>
 </head>
 <body>
+<br><br>
 <center>
 <input id=adr type=text value="" placeholder="CashAddr format address">
-<button onclick="go()">Convert</button>
+<button onclick="go()">Convert</button><br><br><br>
+	<p style="text-align:left; width:1000px;">Test:<br>
+	<b>bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a</b> &rarr; <b>1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu</b><br>
+	<b>bitcoincash:qr95sy3j9xwd2ap32xkykttr4cvcu7as4y0qverfuy</b> &rarr; <b>1KXrWXciRDZUpQwQmuM1DbwsKDLYAYsVLR</b><br>
+	<b>bitcoincash:qqq3728yw0y47sqn6l2na30mcw6zm78dzqre909m2r</b> &rarr; <b>16w1D5WRVKJuZUsSRzdLp9w3YGcgoxDXb</b><br>
+	<b>bitcoincash:ppm2qsznhks23z7629mms6s4cwef74vcwvn0h829pq</b> &rarr; <b>3CWFddi6m4ndiGyKqzYvsFYagqDLPVMTzC</b><br>
+	<b>bitcoincash:pr95sy3j9xwd2ap32xkykttr4cvcu7as4yc93ky28e</b> &rarr; <b>3LDsS579y7sruadqu11beEJoTjdFiFCdX4</b><br>
+	<b>bitcoincash:pqq3728yw0y47sqn6l2na30mcw6zm78dzq5ucqzc37</b> &rarr; <b>31nwvkZwyPdgzjBJZXfDmSWsC4ZLKpYyUw</b><br>
+</p>
 </center>
 
 <script>
 
 function go()
 {
-	var pk = cashaddr2pk(document.getElementById('adr').value);
+	var ca = document.getElementById('adr').value.replace(/(^\s+)|(\s+$)/g, '');
+
+	var pk = cashaddr2pk(ca);
 
 	var adr = pk2adr(pk);
 
 	document.getElementById('adr').value = (pk !== false ? adr : '(bad address)');
+
+	var ca2 = pk2cashaddr(pk); console.log(ca2, ca == ca2);
 }
 
 </script>

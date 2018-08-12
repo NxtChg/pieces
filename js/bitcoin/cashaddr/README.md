@@ -8,5 +8,7 @@ Usage:
 	var adr = pk2adr(pk);
 
 	console.log(adr); // 1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu
+
+	console.log(pk2cashaddr(pk));
 ```
 

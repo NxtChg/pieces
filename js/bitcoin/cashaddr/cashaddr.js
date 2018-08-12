@@ -2,7 +2,7 @@
   Created by NxtChg (admin@nxtchg.com), 2018. License: Public Domain.
 =============================================================================*/
 
-function poly_mod(v) // checksum magic
+function poly_mod(v, ret) // checksum magic
 {
 	var a = 0, b = 1, c = 0;
 
@@ -21,7 +21,7 @@ function poly_mod(v) // checksum magic
 		if(c & 16){ a ^= 0x1e; b ^= 0x4f43e470; }
 	}
 
-	return (a == 0 && (b ^ 1) == 0);
+	return (ret ? [a, b^1] : (a == 0 && (b^1) == 0));
 }//____________________________________________________________________________
 
 function bits5to8(arr) // converts 5-bit words into bytes
@@ -34,6 +34,22 @@ function bits5to8(arr) // converts 5-bit words into bytes
 
 		while(bits > 7){ bits -= 8; out.push((t >> bits) & 0xFF);  }
 	}
+
+	return out;
+}//____________________________________________________________________________
+
+function bits8to5(arr) // converts bytes into 5-bit words
+{
+	var t = 0, bits = 0, out = [];
+
+	for(var i = 0; i < arr.length; i++)
+	{
+		t <<= 8; t |= arr[i]; bits += 8;
+
+		while(bits > 5){ bits -= 5; out.push((t >> bits) & 31); }
+	}
+
+	if(bits) out.push((t & ((1 << bits) - 1)) << (5 - bits));
 
 	return out;
 }//____________________________________________________________________________
@@ -65,7 +81,7 @@ function pk2adr(pk)
 {
 	if(pk === false) return '';
 
-	if(pk[0]) pk[0] = 0x05; // script hash
+	pk = [pk[0] ? 0x05 : 0x00].concat(pk.slice(1));
 
 	var checksum = SHA256(SHA256(pk)).slice(0, 4);
 
@@ -102,4 +118,28 @@ function cashaddr2pk(adr) // returns payload, including the version byte
 	raw = raw.slice(0, -8); // cut off checksum
 
 	return bits5to8(raw); // convert into bytes
+}//____________________________________________________________________________
+
+function pk2cashaddr(pk) // needs version byte + payload
+{
+	var raw = bits8to5(pk); // convert into 5-bit words
+
+	var mod = poly_mod([2, 9, 20, 3, 15, 9, 14, 3, 1, 19, 8, 0].concat(raw).concat([0,0,0,0,0,0,0,0]), true);
+
+	var a = mod[0], b = mod[1], checksum = new Array(8);
+	
+	for(var i = 7; i >= 0; i--) // convert 5-bit groups in mod to checksum values
+	{
+		checksum[i] = (b & 31); b >>>= 5; b |= (a & 31) << 27; a >>>= 5; // (mod >> uint(5*(7-i))) & 0x1f
+	}
+
+	raw = raw.concat(checksum);
+
+	if(!poly_mod([2, 9, 20, 3, 15, 9, 14, 3, 1, 19, 8, 0].concat(raw))) return false; // verify checksum
+
+	var out = 'bitcoincash:', alphabet = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+
+	for(var i = 0; i < raw.length; i++){ out += alphabet[raw[i] & 31]; }
+
+	return out;
 }
