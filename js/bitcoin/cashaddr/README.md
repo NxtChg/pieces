@@ -5,10 +5,8 @@ Usage:
 ```js
 	var pk = cashaddr2pk('bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a');
 
-	var adr = pk2adr(pk);
+	console.log(pk2adr(pk)); // 1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu
 
-	console.log(adr); // 1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu
-
-	console.log(pk2cashaddr(pk));
+	console.log(pk2cashaddr(pk)); // bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a
 ```
 
