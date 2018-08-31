@@ -14,3 +14,7 @@ window.unescape = window.unescape || function(s)
 {
 	return s.replace(/%u([\da-f]{4})|%([\da-f]{2})/gi, function(m,l,s){ return String.fromCharCode(parseInt(l||s, 16)); });
 };//___________________________________________________________________________
+
+Math.log2  = Math.log2  || function(x){ return Math.log(x) * Math.LOG2E;  };
+Math.log10 = Math.log10 || function(x){ return Math.log(x) * Math.LOG10E; };
+//_____________________________________________________________________________

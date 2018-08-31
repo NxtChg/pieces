@@ -13,6 +13,15 @@ js.is_array = function(obj){ return (obj && obj.constructor === Array); };
 js.cb = function(obj, fn){ return function(){ return fn.apply(obj, arguments); }; }; // bind 'this' and function together
 //_____________________________________________________________________________
 
+js.count = function(obj) // returns the number of elements in both arrays and objects
+{
+	var cnt = 0; if(exists(obj.length)) return obj.length;
+	
+	for(var p in obj){ if(obj.hasOwnProperty(p)) cnt++; }
+	
+	return cnt;
+};//___________________________________________________________________________
+
 // neat way to convert a string into array: js.clone([], 'test')
 
 js.clone = function(obj) // any additional arguments will be added to the clone
@@ -36,11 +45,13 @@ js.encode_utf8 = function(s){ return unescape(encodeURIComponent(s)); }; // JS s
 js.decode_utf8 = function(s){ return decodeURIComponent(escape  (s)); }; // utf-8  => JS str
 //_____________________________________________________________________________
 
-js.round = function(n, precision) // fixes nasty JS rounding and behaves like PHP round()
+js.round = function(n, precision, down) // fixes nasty JS rounding and behaves like PHP round()
 {
 	var neg = (n < 0), factor = Math.pow(10, precision);
 
-	var t = Math.round(Math.abs(n) * factor);
+	var t = Math.abs(n) * factor;
+
+	t = (down ? Math.floor(t) : Math.round(t));
 
 	return (neg ? -t : t) / factor;
 };//___________________________________________________________________________
@@ -60,6 +71,10 @@ window.unescape = window.unescape || function(s)
 {
 	return s.replace(/%u([\da-f]{4})|%([\da-f]{2})/gi, function(m,l,s){ return String.fromCharCode(parseInt(l||s, 16)); });
 };//___________________________________________________________________________
+
+Math.log2  = Math.log2  || function(x){ return Math.log(x) * Math.LOG2E;  };
+Math.log10 = Math.log10 || function(x){ return Math.log(x) * Math.LOG10E; };
+//_____________________________________________________________________________
 
 js.get_cookie = function(name)
 {

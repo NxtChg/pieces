@@ -13,6 +13,15 @@ js.is_array = function(obj){ return (obj && obj.constructor === Array); };
 js.cb = function(obj, fn){ return function(){ return fn.apply(obj, arguments); }; }; // bind 'this' and function together
 //_____________________________________________________________________________
 
+js.count = function(obj) // returns the number of elements in both arrays and objects
+{
+	var cnt = 0; if(exists(obj.length)) return obj.length;
+	
+	for(var p in obj){ if(obj.hasOwnProperty(p)) cnt++; }
+	
+	return cnt;
+};//___________________________________________________________________________
+
 // neat way to convert a string into array: js.clone([], 'test')
 
 js.clone = function(obj) // any additional arguments will be added to the clone
@@ -36,11 +45,13 @@ js.encode_utf8 = function(s){ return unescape(encodeURIComponent(s)); }; // JS s
 js.decode_utf8 = function(s){ return decodeURIComponent(escape  (s)); }; // utf-8  => JS str
 //_____________________________________________________________________________
 
-js.round = function(n, precision) // fixes nasty JS rounding and behaves like PHP round()
+js.round = function(n, precision, down) // fixes nasty JS rounding and behaves like PHP round()
 {
 	var neg = (n < 0), factor = Math.pow(10, precision);
 
-	var t = Math.round(Math.abs(n) * factor);
+	var t = Math.abs(n) * factor;
+
+	t = (down ? Math.floor(t) : Math.round(t));
 
 	return (neg ? -t : t) / factor;
 };//___________________________________________________________________________
