@@ -37,7 +37,7 @@ Vue.component('vue-submit',
 
 		progress: function(v)
 		{
-			if(!this.enabled) return;
+			if(!this.enabled && v) return;
 
 			var prev = this.in_progress; this.at = v;
 
