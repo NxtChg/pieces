@@ -34,8 +34,10 @@ js.check_cookies = function()
 {
 	var n = 'testcookie';
 
+	js.set_cookie(n,1); // this is here on purpose, because of Chrome
+
 	if(navigator.cookieEnabled)
 	{
-		js.set_cookie(n,1); if(js.get_cookie(n)){ js.set_cookie(n, '', -1); return true; }
+		if(js.get_cookie(n)){ js.set_cookie(n, '', -1); return true; }
 	}
 };//___________________________________________________________________________
