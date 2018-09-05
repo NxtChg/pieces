@@ -56,6 +56,12 @@ js.round = function(n, precision, down) // fixes nasty JS rounding and behaves l
 	return (neg ? -t : t) / factor;
 };//___________________________________________________________________________
 
+js.round_sig = function(n, digits) // round to a certain number of significant digits
+{
+	return js.round(n, digits - Math.floor(Math.log10(Math.abs(n))) - 1);
+};//___________________________________________________________________________
+
+
 String.prototype.trim = String.prototype.trim || function(){ return this.replace(/(^\s+)|(\s+$)/g, ''); };
 //_____________________________________________________________________________
 
