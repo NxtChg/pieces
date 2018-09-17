@@ -15,7 +15,7 @@ js.cb = function(obj, fn){ return function(){ return fn.apply(obj, arguments); }
 
 js.count = function(obj) // returns the number of elements in both arrays and objects
 {
-	var cnt = 0; if(exists(obj.length)) return obj.length;
+	var cnt = 0; if(defined(obj.length)) return obj.length;
 	
 	for(var p in obj){ if(obj.hasOwnProperty(p)) cnt++; }
 	
