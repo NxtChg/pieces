@@ -96,7 +96,7 @@ function css_parse(css, silent)
 
 	function at_keyframes()
 	{
-		var m = match(/^@([-\w]+)?keyframes\s*/); if(!m) return;
+		var m = match(/^@([-\w]+)?keyframes\s*/i); if(!m) return;
 
 		var vendor = m[1];
 	
@@ -113,14 +113,14 @@ function css_parse(css, silent)
 		return { type: 'keyframes', name: name, vendor: vendor, keyframes: frames };
 	}//___________________________________________________________________________
 
-	function at_page    (){ var m = match(/^@page */);									if(m){ var sel = selector() || []; return { type: 'page', selectors: sel, declarations: declarations() }; } }
-	function at_fontface(){ var m = match(/^@font-face\s*/);							if(m) return { type: 'font-face', declarations: declarations() }; }
-	function at_supports(){ var m = match(/^@supports *([^{]+)/);						if(m) return { type: 'supports', supports: m[1].trim(), rules: rules() }; }
-	function at_host    (){ var m = match(/^@host\s*/);									if(m) return { type: 'host', rules: rules() }; }
-	function at_media   (){ var m = match(/^@media *([^{]+)/);							if(m) return { type: 'media', media: m[1].trim(), rules: rules() }; }
-	function at_custom_m(){ var m = match(/^@custom-media\s+(--[^\s]+)\s*([^{;]+);/);	if(m) return { type: 'custom-media', name: m[1].trim(), media:  m[2].trim() }; }
-	function at_document(){ var m = match(/^@([-\w]+)?document *([^{]+)/);				if(m) return { type: 'document', document: m[2].trim(), vendor: m[1].trim(), rules: rules() }; }
-	function at_x       (){ var m = match(/^@(import|charset|namespace)\s*([^;]+);/);	if(m) return { type: m[1], name: m[2].trim() }; }
+	function at_page    (){ var m = match(/^@page */i);									if(m){ var sel = selector() || []; return { type: 'page', selectors: sel, declarations: declarations() }; } }
+	function at_fontface(){ var m = match(/^@font-face\s*/i);							if(m) return { type: 'font-face', declarations: declarations() }; }
+	function at_supports(){ var m = match(/^@supports *([^{]+)/i);						if(m) return { type: 'supports', supports: m[1].trim(), rules: rules() }; }
+	function at_host    (){ var m = match(/^@host\s*/i);									if(m) return { type: 'host', rules: rules() }; }
+	function at_media   (){ var m = match(/^@media *([^{]+)/i);							if(m) return { type: 'media', media: m[1].trim(), rules: rules() }; }
+	function at_custom_m(){ var m = match(/^@custom-media\s+(--[^\s]+)\s*([^{;]+);/i);	if(m) return { type: 'custom-media', name: m[1].trim(), media:  m[2].trim() }; }
+	function at_document(){ var m = match(/^@([-\w]+)?document *([^{]+)/i);				if(m) return { type: 'document', document: m[2].trim(), vendor: m[1] ? m[1].trim() : undefined, rules: rules() }; }
+	function at_x       (){ var m = match(/^@(import|charset|namespace)\s*([^;]+);/i);	if(m) return { type: m[1], name: m[2].trim() }; }
 	//____________________________________________________________________________
 
 	function at_rule()
